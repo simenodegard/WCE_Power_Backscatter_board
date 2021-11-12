@@ -1,0 +1,726 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD20\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">11/12/2021</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">8:32:56 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc" class="file"><acronym title="C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc">C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">126</td></tr>
+</table>
+</td>
+</table><a name="IDIQB41N4EMBOOEF4JTKSZK01VGJYPVOZRKJYIAGFJDXLQWEP4WGSF"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKWZMPAIYL5NZHIBHEUOZGQRG3ABPEB3UTG1ULRLQVF31PSL3AE">Clearance Constraint (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDR4VAHQRU4BIPHHT1KGRFCXWQNCKJUUQHDCV2KTH2J1PYYPCF3QKF">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0I4ZBAFRYQDECGDWFIE01CW3DFUAULP0RL2IGDOZXP4A40SKHLVB">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">30</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2ENP10CY11AYCMWYNKQGBO3UIMXKUVAU4LHANIKT24OHZPU3P1FH">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNCRQQ2JSL0AXHUQXUJLFPGLCXMR54Y33X4VZFLSRRC0KEELSMM">Width Constraint (Min=0.254mm) (Max=0.254mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOU1WTLLN4KWZFUVTLYIWVMYJ0MTWBT41N4VLMFLSPRQIGTHKLLK">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5XCAUWYBMUH4HOBHA1YMS5XPOCZ1MAFK3ONLH3KBKB5XYQKV3KLE">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTF33HC34YFZQLVL02BFYMZCFELO2M15Y3SXCJROXPSBPW0CUQVHC">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRV3JNRTQ2IHODOTBIN0CZ2WJUDG0NV1BABUUTPGTK5YIGEPAOPDF">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">12</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID41NSETMTIHIOC2RL01WXTZLFQMTMHB1JLJVIN0MAG0IUSAJDNBTE">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">60</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXZN5NDLSIQR1SUGJXEM45WXHPM5MKRY3EMQIVG1V33D1QAZICBI">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">20</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEGZ2VPTJYOGCNYGBTI2JY0GRNBKY5LE4HHW12FFURO5A0X0MLP4N">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTVXG3XKGLQU0BV0PIPKNQ1WA1BBOH3G1CCE1HEEUDDKNMA31B0LD">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">126</td>
+</tr>
+</table><br><a name="IDKWZMPAIYL5NZHIBHEUOZGQRG3ABPEB3UTG1ULRLQVF31PSL3AE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=0.1mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.03mil|Location2.X=3711.655mil|Location1.Y=3054.132mil|Location2.Y=3057.757mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.03mil|Location2.X=3711.655mil|Location1.Y=3054.132mil|Location2.Y=3057.757mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U1-1(0.335mm,-3.925mm) on Top Layer And Region (0 hole(s)) Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3665.904mil|Location2.X=3669.529mil|Location1.Y=3054.132mil|Location2.Y=3057.757mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3665.904mil|Location2.X=3669.529mil|Location1.Y=3054.132mil|Location2.Y=3057.757mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.1mm) Between Pad U1-4(-0.735mm,-3.925mm) on Top Layer And Region (0 hole(s)) Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDR4VAHQRU4BIPHHT1KGRFCXWQNCKJUUQHDCV2KTH2J1PYYPCF3QKF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Short-Circuit Constraint (Allowed=No) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3703.824mil|Location2.X=3722.523mil|Location1.Y=3051.123mil|Location2.Y=3069.821mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3703.824mil|Location2.X=3722.523mil|Location1.Y=3051.123mil|Location2.Y=3069.821mil|Absolute=True">Short-Circuit Constraint: Between Pad U1-1(0.335mm,-3.925mm) on Top Layer And Region (0 hole(s)) Top Layer Location : [X = 94.315mm][Y = 77.736mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3661.729mil|Location2.X=3680.428mil|Location1.Y=3051.123mil|Location2.Y=3069.821mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3661.729mil|Location2.X=3680.428mil|Location1.Y=3051.123mil|Location2.Y=3069.821mil|Absolute=True">Short-Circuit Constraint: Between Pad U1-4(-0.735mm,-3.925mm) on Top Layer And Region (0 hole(s)) Top Layer Location : [X = 93.245mm][Y = 77.736mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID0I4ZBAFRYQDECGDWFIE01CW3DFUAULP0RL2IGDOZXP4A40SKHLVB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3638.52mil|Location2.X=3708.272mil|Location1.Y=3057.121mil|Location2.Y=3100.102mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3638.52mil|Location2.X=3708.272mil|Location1.Y=3057.121mil|Location2.Y=3100.102mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C1-1(-1.3mm,-3.2mm) on Top Layer And Pad U1-5(-0.2mm,-3.6mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3638.52mil|Location2.X=3675.984mil|Location1.Y=3054.37mil|Location2.Y=3078.055mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3638.52mil|Location2.X=3675.984mil|Location1.Y=3054.37mil|Location2.Y=3078.055mil|Absolute=True">Un-Routed Net Constraint: Net V_BAT Between Pad C1-2(-1.3mm,-3.76mm) on Top Layer And Pad U1-4(-0.735mm,-3.925mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3642.457mil|Location2.X=3708.272mil|Location1.Y=3340.586mil|Location2.Y=3374.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3642.457mil|Location2.X=3708.272mil|Location1.Y=3340.586mil|Location2.Y=3374.905mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C2-1(-1.2mm,3.78mm) on Top Layer And Pad U2-5(-0.2mm,3.6mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3663.055mil|Location1.Y=3246.039mil|Location2.Y=3352.858mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3663.055mil|Location1.Y=3246.039mil|Location2.Y=3352.858mil|Absolute=True">Un-Routed Net Constraint: Net VDD Between Pad J?-1(-3.15mm,1mm) on Top Layer [Unplated] And Pad C2-2(-1.2mm,3.22mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3642.457mil|Location2.X=3675.984mil|Location1.Y=3330.685mil|Location2.Y=3352.858mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3642.457mil|Location2.X=3675.984mil|Location1.Y=3330.685mil|Location2.Y=3352.858mil|Absolute=True">Un-Routed Net Constraint: Net VDD Between Pad C2-2(-1.2mm,3.22mm) on Top Layer And Pad U2-4(-0.735mm,3.275mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3721.197mil|Location2.X=3770.929mil|Location1.Y=3329.701mil|Location2.Y=3378.843mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3721.197mil|Location2.X=3770.929mil|Location1.Y=3329.701mil|Location2.Y=3378.843mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C5-1(0.8mm,3.88mm) on Top Layer And Pad C3-1(1.52mm,3.175mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3748.756mil|Location2.X=3782.74mil|Location1.Y=3264.15mil|Location2.Y=3350.299mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3748.756mil|Location2.X=3782.74mil|Location1.Y=3264.15mil|Location2.Y=3350.299mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C3-1(1.52mm,3.175mm) on Top Layer And Pad U3-3(1.775mm,2.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3721.197mil|Location2.X=3792.976mil|Location1.Y=3329.701mil|Location2.Y=3356.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3721.197mil|Location2.X=3792.976mil|Location1.Y=3329.701mil|Location2.Y=3356.795mil|Absolute=True">Un-Routed Net Constraint: Net 2V5 Between Pad C5-2(0.8mm,3.32mm) on Top Layer And Pad C3-2(2.08mm,3.175mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3770.803mil|Location2.X=3833.921mil|Location1.Y=3264.15mil|Location2.Y=3350.299mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3770.803mil|Location2.X=3833.921mil|Location1.Y=3264.15mil|Location2.Y=3350.299mil|Absolute=True">Un-Routed Net Constraint: Net 2V5 Between Pad C3-2(2.08mm,3.175mm) on Top Layer And Pad U3-1(3.075mm,2.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.268mil|Location2.X=3745.732mil|Location1.Y=3077.142mil|Location2.Y=3099.315mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.268mil|Location2.X=3745.732mil|Location1.Y=3077.142mil|Location2.Y=3099.315mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-2(0.335mm,-3.275mm) on Top Layer And Pad C4-1(0.9mm,-3.22mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3725.134mil|Location2.X=3757.15mil|Location1.Y=3077.142mil|Location2.Y=3165.85mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3725.134mil|Location2.X=3757.15mil|Location1.Y=3077.142mil|Location2.Y=3165.85mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C4-1(0.9mm,-3.22mm) on Top Layer And Pad U3-5(1.125mm,-2.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.268mil|Location2.X=3745.732mil|Location1.Y=3054.37mil|Location2.Y=3077.268mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.268mil|Location2.X=3745.732mil|Location1.Y=3054.37mil|Location2.Y=3077.268mil|Absolute=True">Un-Routed Net Constraint: Net VDD Between Pad U1-1(0.335mm,-3.925mm) on Top Layer And Pad C4-2(0.9mm,-3.78mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.268mil|Location2.X=3741.795mil|Location1.Y=3356.669mil|Location2.Y=3378.843mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.268mil|Location2.X=3741.795mil|Location1.Y=3356.669mil|Location2.Y=3378.843mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U2-2(0.335mm,3.925mm) on Top Layer And Pad C5-1(0.8mm,3.88mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.268mil|Location2.X=3741.795mil|Location1.Y=3334.622mil|Location2.Y=3356.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.268mil|Location2.X=3741.795mil|Location1.Y=3334.622mil|Location2.Y=3356.795mil|Absolute=True">Un-Routed Net Constraint: Net 2V5 Between Pad U2-1(0.335mm,3.275mm) on Top Layer And Pad C5-2(0.8mm,3.32mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3718.11mil|Location1.Y=3054.37mil|Location2.Y=3262.701mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3718.11mil|Location1.Y=3054.37mil|Location2.Y=3262.701mil|Absolute=True">Un-Routed Net Constraint: Net VDD Between Pad J?-1(-3.15mm,1mm) on Top Layer [Unplated] And Pad U1-1(0.335mm,-3.925mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3715.811mil|Location1.Y=3167.299mil|Location2.Y=3183.961mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3715.811mil|Location1.Y=3167.299mil|Location2.Y=3183.961mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J?-11(-3.15mm,-1mm) on Top Layer [Unplated] And Pad J?-12(-0.05mm,-1mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3593.764mil|Location1.Y=3167.299mil|Location2.Y=3199.709mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3593.764mil|Location1.Y=3167.299mil|Location2.Y=3199.709mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J?-11(-3.15mm,-1mm) on Top Layer [Unplated] And Pad J?-9(-3.15mm,-0.6mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3680.252mil|Location2.X=3715.811mil|Location1.Y=3167.299mil|Location2.Y=3215.457mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3680.252mil|Location2.X=3715.811mil|Location1.Y=3167.299mil|Location2.Y=3215.457mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J?-12(-0.05mm,-1mm) on Top Layer [Unplated] And Pad J?-8(-0.05mm,-0.2mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3680.252mil|Location2.X=3757.15mil|Location1.Y=3102.732mil|Location2.Y=3183.961mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3680.252mil|Location2.X=3757.15mil|Location1.Y=3102.732mil|Location2.Y=3183.961mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J?-12(-0.05mm,-1mm) on Top Layer [Unplated] And Pad U3-5(1.125mm,-2.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3593.764mil|Location1.Y=3214.543mil|Location2.Y=3246.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3593.764mil|Location1.Y=3214.543mil|Location2.Y=3246.953mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J?-5(-3.15mm,0.2mm) on Top Layer [Unplated] And Pad J?-3(-3.15mm,0.6mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3593.764mil|Location1.Y=3183.047mil|Location2.Y=3231.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3593.764mil|Location1.Y=3183.047mil|Location2.Y=3231.205mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J?-9(-3.15mm,-0.6mm) on Top Layer [Unplated] And Pad J?-5(-3.15mm,0.2mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3680.252mil|Location2.X=3715.811mil|Location1.Y=3198.795mil|Location2.Y=3231.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3680.252mil|Location2.X=3715.811mil|Location1.Y=3198.795mil|Location2.Y=3231.205mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J?-8(-0.05mm,-0.2mm) on Top Layer [Unplated] And Pad J?-6(-0.05mm,0.2mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3675.979mil|Location2.X=3715.811mil|Location1.Y=3214.543mil|Location2.Y=3372.879mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3675.979mil|Location2.X=3715.811mil|Location1.Y=3214.543mil|Location2.Y=3372.879mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U2-5(-0.2mm,3.6mm) on Top Layer And Pad J?-6(-0.05mm,0.2mm) on Top Layer [Unplated] </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3808.331mil|Location1.Y=3198.795mil|Location2.Y=3327.268mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.205mil|Location2.X=3808.331mil|Location1.Y=3198.795mil|Location2.Y=3327.268mil|Absolute=True">Un-Routed Net Constraint: Net SPI_DATA Between Pad J?-7(-3.15mm,-0.2mm) on Top Layer [Unplated] And Pad U3-2(2.425mm,2.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3675.979mil|Location2.X=3718.11mil|Location1.Y=3057.121mil|Location2.Y=3092.165mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3675.979mil|Location2.X=3718.11mil|Location1.Y=3057.121mil|Location2.Y=3092.165mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-5(-0.2mm,-3.6mm) on Top Layer And Pad U1-2(0.335mm,-3.275mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3666.142mil|Location2.X=3675.984mil|Location1.Y=3054.37mil|Location2.Y=3092.165mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3666.142mil|Location2.X=3675.984mil|Location1.Y=3054.37mil|Location2.Y=3092.165mil|Absolute=True">Un-Routed Net Constraint: Net V_BAT Between Pad U1-4(-0.735mm,-3.925mm) on Top Layer And Pad U1-3(-0.735mm,-3.275mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3675.979mil|Location2.X=3718.11mil|Location1.Y=3340.586mil|Location2.Y=3375.63mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3675.979mil|Location2.X=3718.11mil|Location1.Y=3340.586mil|Location2.Y=3375.63mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U2-5(-0.2mm,3.6mm) on Top Layer And Pad U2-2(0.335mm,3.925mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3666.142mil|Location2.X=3675.984mil|Location1.Y=3337.834mil|Location2.Y=3375.63mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3666.142mil|Location2.X=3675.984mil|Location1.Y=3337.834mil|Location2.Y=3375.63mil|Absolute=True">Un-Routed Net Constraint: Net VDD Between Pad U2-4(-0.735mm,3.275mm) on Top Layer And Pad U2-3(-0.735mm,3.925mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3731.433mil|Location2.X=3782.74mil|Location1.Y=3102.732mil|Location2.Y=3165.85mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3731.433mil|Location2.X=3782.74mil|Location1.Y=3102.732mil|Location2.Y=3165.85mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-5(1.125mm,-2.05mm) on Top Layer And Pad U3-6(1.775mm,-2.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3757.024mil|Location2.X=3808.331mil|Location1.Y=3102.732mil|Location2.Y=3165.85mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3757.024mil|Location2.X=3808.331mil|Location1.Y=3102.732mil|Location2.Y=3165.85mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-6(1.775mm,-2.05mm) on Top Layer And Pad U3-7(2.425mm,-2.05mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDRV3JNRTQ2IHODOTBIN0CZ2WJUDG0NV1BABUUTPGTK5YIGEPAOPDF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3739.651mil|Location2.X=3750.901mil|Location1.Y=3347.859mil|Location2.Y=3359.109mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3739.651mil|Location2.X=3750.901mil|Location1.Y=3347.859mil|Location2.Y=3359.109mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.24mm &lt; 0.254mm) Between Pad C3-1(1.52mm,3.175mm) on Top Layer And Pad C5-1(0.8mm,3.88mm) on Top Layer [Top Solder] Mask Sliver [0.24mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3739.651mil|Location2.X=3750.901mil|Location1.Y=3344.674mil|Location2.Y=3355.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3739.651mil|Location2.X=3750.901mil|Location1.Y=3344.674mil|Location2.Y=3355.924mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.177mm &lt; 0.254mm) Between Pad C3-1(1.52mm,3.175mm) on Top Layer And Pad C5-2(0.8mm,3.32mm) on Top Layer [Top Solder] Mask Sliver [0.177mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3764.257mil|Location2.X=3775.507mil|Location1.Y=3322.859mil|Location2.Y=3334.109mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3764.257mil|Location2.X=3775.507mil|Location1.Y=3322.859mil|Location2.Y=3334.109mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.062mm &lt; 0.254mm) Between Pad C3-1(1.52mm,3.175mm) on Top Layer And Pad U3-3(1.775mm,2.05mm) on Top Layer [Top Solder] Mask Sliver [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3742.7mil|Location2.X=3756.367mil|Location1.Y=3322.602mil|Location2.Y=3333.852mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3742.7mil|Location2.X=3756.367mil|Location1.Y=3322.602mil|Location2.Y=3333.852mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.078mm &lt; 0.254mm) Between Pad C3-1(1.52mm,3.175mm) on Top Layer And Pad U3-4(1.125mm,2.05mm) on Top Layer [Top Solder] Mask Sliver [0.078mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3787.564mil|Location2.X=3798.814mil|Location1.Y=3322.775mil|Location2.Y=3334.025mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3787.564mil|Location2.X=3798.814mil|Location1.Y=3322.775mil|Location2.Y=3334.025mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad C3-2(2.08mm,3.175mm) on Top Layer And Pad U3-2(2.425mm,2.05mm) on Top Layer [Top Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3765.104mil|Location2.X=3776.354mil|Location1.Y=3322.847mil|Location2.Y=3334.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3765.104mil|Location2.X=3776.354mil|Location1.Y=3322.847mil|Location2.Y=3334.097mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.063mm &lt; 0.254mm) Between Pad C3-2(2.08mm,3.175mm) on Top Layer And Pad U3-3(1.775mm,2.05mm) on Top Layer [Top Solder] Mask Sliver [0.063mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3738.666mil|Location2.X=3749.916mil|Location1.Y=3095.398mil|Location2.Y=3106.648mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3738.666mil|Location2.X=3749.916mil|Location1.Y=3095.398mil|Location2.Y=3106.648mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.087mm &lt; 0.254mm) Between Pad C4-1(0.9mm,-3.22mm) on Top Layer And Pad U3-5(1.125mm,-2.05mm) on Top Layer [Top Solder] Mask Sliver [0.087mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3736.63mil|Location2.X=3747.88mil|Location1.Y=3325.271mil|Location2.Y=3336.521mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3736.63mil|Location2.X=3747.88mil|Location1.Y=3325.271mil|Location2.Y=3336.521mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.191mm &lt; 0.254mm) Between Pad C5-2(0.8mm,3.32mm) on Top Layer And Pad U3-4(1.125mm,2.05mm) on Top Layer [Top Solder] Mask Sliver [0.191mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3586.17mil|Location2.X=3597.42mil|Location1.Y=3259.769mil|Location2.Y=3271.019mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3586.17mil|Location2.X=3597.42mil|Location1.Y=3259.769mil|Location2.Y=3271.019mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.137mm &lt; 0.254mm) Between Pad J?-1(-3.15mm,1mm) on Top Layer And Pad J?-MP2(-3.1mm,1.95mm) on Top Layer [Top Solder] Mask Sliver [0.137mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.485mil|Location2.X=3569.735mil|Location1.Y=3158.981mil|Location2.Y=3170.231mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.485mil|Location2.X=3569.735mil|Location1.Y=3158.981mil|Location2.Y=3170.231mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.137mm &lt; 0.254mm) Between Pad J?-11(-3.15mm,-1mm) on Top Layer And Pad J?-MP4(-3.1mm,-1.95mm) on Top Layer [Top Solder] Mask Sliver [0.137mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.595mil|Location2.X=3687.845mil|Location1.Y=3158.981mil|Location2.Y=3170.231mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.595mil|Location2.X=3687.845mil|Location1.Y=3158.981mil|Location2.Y=3170.231mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.137mm &lt; 0.254mm) Between Pad J?-12(-0.05mm,-1mm) on Top Layer And Pad J?-MP3(-0.1mm,-1.95mm) on Top Layer [Top Solder] Mask Sliver [0.137mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3704.28mil|Location2.X=3715.53mil|Location1.Y=3259.769mil|Location2.Y=3271.019mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3704.28mil|Location2.X=3715.53mil|Location1.Y=3259.769mil|Location2.Y=3271.019mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.137mm &lt; 0.254mm) Between Pad J?-2(-0.05mm,1mm) on Top Layer And Pad J?-MP1(-0.1mm,1.95mm) on Top Layer [Top Solder] Mask Sliver [0.137mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID41NSETMTIHIOC2RL01WXTZLFQMTMHB1JLJVIN0MAG0IUSAJDNBTE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.874mil|Location2.X=3662.765mil|Location1.Y=3091.211mil|Location2.Y=3102.461mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.874mil|Location2.X=3662.765mil|Location1.Y=3091.211mil|Location2.Y=3102.461mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.042mm &lt; 0.254mm) Between Pad C1-1(-1.3mm,-3.2mm) on Top Layer And Track (-1.08mm,-2.904mm)(-0.88mm,-2.904mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.042mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3653.66mil|Location2.X=3661.326mil|Location1.Y=3092.269mil|Location2.Y=3099.936mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3653.66mil|Location2.X=3661.326mil|Location1.Y=3092.269mil|Location2.Y=3099.936mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C1-1(-1.3mm,-3.2mm) on Top Layer And Track (-1.08mm,-3.104mm)(-1.08mm,-2.904mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.895mil|Location2.X=3648.145mil|Location1.Y=3094.808mil|Location2.Y=3106.058mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.895mil|Location2.X=3648.145mil|Location1.Y=3094.808mil|Location2.Y=3106.058mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.22mm &lt; 0.254mm) Between Pad C1-1(-1.3mm,-3.2mm) on Top Layer And Track (-3mm,-2.75mm)(-0.2mm,-2.75mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.22mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3650.05mil|Location2.X=3663.403mil|Location1.Y=3052.814mil|Location2.Y=3064.064mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3650.05mil|Location2.X=3663.403mil|Location1.Y=3052.814mil|Location2.Y=3064.064mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.079mm &lt; 0.254mm) Between Pad C1-2(-1.3mm,-3.76mm) on Top Layer And Track (-1.08mm,-4.296mm)(-1.08mm,-4.096mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.079mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3651.868mil|Location2.X=3663.118mil|Location1.Y=3366.211mil|Location2.Y=3377.461mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3651.868mil|Location2.X=3663.118mil|Location1.Y=3366.211mil|Location2.Y=3377.461mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.047mm &lt; 0.254mm) Between Pad C2-1(-1.2mm,3.78mm) on Top Layer And Track (-1.08mm,4.096mm)(-1.08mm,4.296mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3653.43mil|Location2.X=3664.68mil|Location1.Y=3370.148mil|Location2.Y=3381.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3653.43mil|Location2.X=3664.68mil|Location1.Y=3370.148mil|Location2.Y=3381.398mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.247mm &lt; 0.254mm) Between Pad C2-1(-1.2mm,3.78mm) on Top Layer And Track (-1.08mm,4.296mm)(-0.88mm,4.296mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.247mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3653.43mil|Location2.X=3664.68mil|Location1.Y=3328.129mil|Location2.Y=3339.379mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3653.43mil|Location2.X=3664.68mil|Location1.Y=3328.129mil|Location2.Y=3339.379mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.047mm &lt; 0.254mm) Between Pad C2-2(-1.2mm,3.22mm) on Top Layer And Track (-1.08mm,2.904mm)(-0.88mm,2.904mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3653.66mil|Location2.X=3661.326mil|Location1.Y=3330.852mil|Location2.Y=3338.518mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3653.66mil|Location2.X=3661.326mil|Location1.Y=3330.852mil|Location2.Y=3338.518mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C2-2(-1.2mm,3.22mm) on Top Layer And Track (-1.08mm,2.904mm)(-1.08mm,3.104mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3653.43mil|Location2.X=3664.68mil|Location1.Y=3324.336mil|Location2.Y=3335.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3653.43mil|Location2.X=3664.68mil|Location1.Y=3324.336mil|Location2.Y=3335.586mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.24mm &lt; 0.254mm) Between Pad C2-2(-1.2mm,3.22mm) on Top Layer And Track (-3.2mm,2.75mm)(0.1mm,2.75mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.24mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3766.058mil|Location2.X=3773.725mil|Location1.Y=3332.83mil|Location2.Y=3340.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3766.058mil|Location2.X=3773.725mil|Location1.Y=3332.83mil|Location2.Y=3340.496mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C3-1(1.52mm,3.175mm) on Top Layer And Text "C2" (0.337mm,4.783mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3762.338mil|Location2.X=3773.588mil|Location1.Y=3340.674mil|Location2.Y=3351.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3762.338mil|Location2.X=3773.588mil|Location1.Y=3340.674mil|Location2.Y=3351.924mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.053mm &lt; 0.254mm) Between Pad C3-1(1.52mm,3.175mm) on Top Layer And Text "C5" (1.88mm,3.968mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.053mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3769.403mil|Location2.X=3777.07mil|Location1.Y=3329.485mil|Location2.Y=3337.151mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3769.403mil|Location2.X=3777.07mil|Location1.Y=3329.485mil|Location2.Y=3337.151mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C3-2(2.08mm,3.175mm) on Top Layer And Text "C2" (0.337mm,4.783mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3770.163mil|Location2.X=3777.829mil|Location1.Y=3342.466mil|Location2.Y=3350.133mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3770.163mil|Location2.X=3777.829mil|Location1.Y=3342.466mil|Location2.Y=3350.133mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C3-2(2.08mm,3.175mm) on Top Layer And Text "C5" (1.88mm,3.968mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3783.671mil|Location2.X=3791.338mil|Location1.Y=3328.667mil|Location2.Y=3336.333mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3783.671mil|Location2.X=3791.338mil|Location1.Y=3328.667mil|Location2.Y=3336.333mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C3-2(2.08mm,3.175mm) on Top Layer And Text "J?" (1.969mm,2.984mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3723.03mil|Location2.X=3736.178mil|Location1.Y=3090.771mil|Location2.Y=3102.021mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3723.03mil|Location2.X=3736.178mil|Location1.Y=3090.771mil|Location2.Y=3102.021mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.06mm &lt; 0.254mm) Between Pad C4-1(0.9mm,-3.22mm) on Top Layer And Track (0.48mm,-2.904mm)(0.68mm,-2.904mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.06mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.926mil|Location2.X=3730.592mil|Location1.Y=3091.482mil|Location2.Y=3099.148mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.926mil|Location2.X=3730.592mil|Location1.Y=3091.482mil|Location2.Y=3099.148mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C4-1(0.9mm,-3.22mm) on Top Layer And Track (0.68mm,-3.104mm)(0.68mm,-2.904mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.631mil|Location2.X=3733.881mil|Location1.Y=3048.574mil|Location2.Y=3059.824mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.631mil|Location2.X=3733.881mil|Location1.Y=3048.574mil|Location2.Y=3059.824mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.253mm &lt; 0.254mm) Between Pad C4-2(0.9mm,-3.78mm) on Top Layer And Track (0.23mm,-4.296mm)(0.68mm,-4.296mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.253mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.926mil|Location2.X=3730.592mil|Location1.Y=3055.261mil|Location2.Y=3062.928mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.926mil|Location2.X=3730.592mil|Location1.Y=3055.261mil|Location2.Y=3062.928mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C4-2(0.9mm,-3.78mm) on Top Layer And Track (0.68mm,-4.296mm)(0.68mm,-3.81mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3719.419mil|Location2.X=3727.086mil|Location1.Y=3359.475mil|Location2.Y=3367.141mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3719.419mil|Location2.X=3727.086mil|Location1.Y=3359.475mil|Location2.Y=3367.141mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C5-1(0.8mm,3.88mm) on Top Layer And Text "C2" (0.337mm,4.783mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3719.572mil|Location2.X=3730.822mil|Location1.Y=3372.117mil|Location2.Y=3383.367mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3719.572mil|Location2.X=3730.822mil|Location1.Y=3372.117mil|Location2.Y=3383.367mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.147mm &lt; 0.254mm) Between Pad C5-1(0.8mm,3.88mm) on Top Layer And Track (0.48mm,4.296mm)(0.68mm,4.296mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3721.134mil|Location2.X=3732.384mil|Location1.Y=3350.692mil|Location2.Y=3361.942mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3721.134mil|Location2.X=3732.384mil|Location1.Y=3350.692mil|Location2.Y=3361.942mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.221mm &lt; 0.254mm) Between Pad C5-1(0.8mm,3.88mm) on Top Layer And Track (0.68mm,2.904mm)(0.68mm,3.39mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.221mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.926mil|Location2.X=3730.592mil|Location1.Y=3372.434mil|Location2.Y=3380.101mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.926mil|Location2.X=3730.592mil|Location1.Y=3372.434mil|Location2.Y=3380.101mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C5-1(0.8mm,3.88mm) on Top Layer And Track (0.68mm,4.096mm)(0.68mm,4.296mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3719.528mil|Location2.X=3730.778mil|Location1.Y=3332.953mil|Location2.Y=3344.203mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3719.528mil|Location2.X=3730.778mil|Location1.Y=3332.953mil|Location2.Y=3344.203mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.003mm &lt; 0.254mm) Between Pad C5-2(0.8mm,3.32mm) on Top Layer And Text "C2" (0.337mm,4.783mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.003mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3719.572mil|Location2.X=3730.822mil|Location1.Y=3330.097mil|Location2.Y=3341.347mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3719.572mil|Location2.X=3730.822mil|Location1.Y=3330.097mil|Location2.Y=3341.347mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.147mm &lt; 0.254mm) Between Pad C5-2(0.8mm,3.32mm) on Top Layer And Track (0.23mm,2.904mm)(0.68mm,2.904mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.926mil|Location2.X=3730.592mil|Location1.Y=3334.789mil|Location2.Y=3342.455mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.926mil|Location2.X=3730.592mil|Location1.Y=3334.789mil|Location2.Y=3342.455mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C5-2(0.8mm,3.32mm) on Top Layer And Track (0.68mm,2.904mm)(0.68mm,3.39mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3694.976mil|Location2.X=3702.643mil|Location1.Y=3183.214mil|Location2.Y=3190.881mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3694.976mil|Location2.X=3702.643mil|Location1.Y=3183.214mil|Location2.Y=3190.881mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad J?-10(-0.05mm,-0.6mm) on Top Layer And Text "C1" (-1.554mm,-0.077mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3181.422mil|Location2.Y=3192.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3181.422mil|Location2.Y=3192.672mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Pad J?-10(-0.05mm,-0.6mm) on Top Layer And Track (0.5mm,-0.95mm)(0.5mm,0.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.863mil|Location2.X=3720.289mil|Location1.Y=3178.21mil|Location2.Y=3189.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.863mil|Location2.X=3720.289mil|Location1.Y=3178.21mil|Location2.Y=3189.46mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.212mm &lt; 0.254mm) Between Pad J?-10(-0.05mm,-0.6mm) on Top Layer And Track (0.5mm,-0.95mm)(3.7mm,-0.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.212mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3684.979mil|Location2.X=3692.646mil|Location1.Y=3168.135mil|Location2.Y=3175.802mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3684.979mil|Location2.X=3692.646mil|Location1.Y=3168.135mil|Location2.Y=3175.802mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad J?-12(-0.05mm,-1mm) on Top Layer And Text "C1" (-1.554mm,-0.077mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3174.336mil|Location2.Y=3185.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3174.336mil|Location2.Y=3185.586mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Pad J?-12(-0.05mm,-1mm) on Top Layer And Track (0.5mm,-0.95mm)(0.5mm,0.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3171.973mil|Location2.Y=3183.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3171.973mil|Location2.Y=3183.223mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Pad J?-12(-0.05mm,-1mm) on Top Layer And Track (0.5mm,-0.95mm)(3.7mm,-0.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3677.806mil|Location2.X=3685.472mil|Location1.Y=3246.206mil|Location2.Y=3253.873mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3677.806mil|Location2.X=3685.472mil|Location1.Y=3246.206mil|Location2.Y=3253.873mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad J?-2(-0.05mm,1mm) on Top Layer And Text "U2" (0.549mm,2.012mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3244.414mil|Location2.Y=3255.664mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3244.414mil|Location2.Y=3255.664mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Pad J?-2(-0.05mm,1mm) on Top Layer And Track (0.5mm,-0.95mm)(0.5mm,0.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3246.776mil|Location2.Y=3258.026mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3246.776mil|Location2.Y=3258.026mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Pad J?-2(-0.05mm,1mm) on Top Layer And Track (0.5mm,0.95mm)(3.7mm,0.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3677.806mil|Location2.X=3685.472mil|Location1.Y=3230.458mil|Location2.Y=3238.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3677.806mil|Location2.X=3685.472mil|Location1.Y=3230.458mil|Location2.Y=3238.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad J?-4(-0.05mm,0.6mm) on Top Layer And Text "U2" (0.549mm,2.012mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3228.666mil|Location2.Y=3239.916mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3228.666mil|Location2.Y=3239.916mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Pad J?-4(-0.05mm,0.6mm) on Top Layer And Track (0.5mm,-0.95mm)(0.5mm,0.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.863mil|Location2.X=3720.353mil|Location1.Y=3240.54mil|Location2.Y=3251.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.863mil|Location2.X=3720.353mil|Location1.Y=3240.54mil|Location2.Y=3251.79mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.212mm &lt; 0.254mm) Between Pad J?-4(-0.05mm,0.6mm) on Top Layer And Track (0.5mm,0.95mm)(3.7mm,0.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.212mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3683.188mil|Location2.X=3694.438mil|Location1.Y=3212.124mil|Location2.Y=3223.374mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3683.188mil|Location2.X=3694.438mil|Location1.Y=3212.124mil|Location2.Y=3223.374mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.04mm &lt; 0.254mm) Between Pad J?-6(-0.05mm,0.2mm) on Top Layer And Text "C1" (-1.554mm,-0.077mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.04mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3678.19mil|Location2.X=3691.594mil|Location1.Y=3222.759mil|Location2.Y=3234.009mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3678.19mil|Location2.X=3691.594mil|Location1.Y=3222.759mil|Location2.Y=3234.009mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.064mm &lt; 0.254mm) Between Pad J?-6(-0.05mm,0.2mm) on Top Layer And Text "U2" (0.549mm,2.012mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.064mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3212.918mil|Location2.Y=3224.168mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3212.918mil|Location2.Y=3224.168mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Pad J?-6(-0.05mm,0.2mm) on Top Layer And Track (0.5mm,-0.95mm)(0.5mm,0.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3694.976mil|Location2.X=3702.643mil|Location1.Y=3198.125mil|Location2.Y=3205.792mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3694.976mil|Location2.X=3702.643mil|Location1.Y=3198.125mil|Location2.Y=3205.792mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad J?-8(-0.05mm,-0.2mm) on Top Layer And Text "C1" (-1.554mm,-0.077mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3197.17mil|Location2.Y=3208.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.155mil|Location2.X=3719.405mil|Location1.Y=3197.17mil|Location2.Y=3208.42mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.1mm &lt; 0.254mm) Between Pad J?-8(-0.05mm,-0.2mm) on Top Layer And Track (0.5mm,-0.95mm)(0.5mm,0.95mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3701.456mil|Location2.X=3712.706mil|Location1.Y=3305.832mil|Location2.Y=3317.082mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3701.456mil|Location2.X=3712.706mil|Location1.Y=3305.832mil|Location2.Y=3317.082mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.06mm &lt; 0.254mm) Between Pad J?-MP1(-0.1mm,1.95mm) on Top Layer And Text "C2" (0.337mm,4.783mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.06mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3702.072mil|Location2.X=3709.739mil|Location1.Y=3290.399mil|Location2.Y=3298.065mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3702.072mil|Location2.X=3709.739mil|Location1.Y=3290.399mil|Location2.Y=3298.065mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad J?-MP1(-0.1mm,1.95mm) on Top Layer And Text "U2" (0.549mm,2.012mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3680.595mil|Location2.X=3691.845mil|Location1.Y=3310.753mil|Location2.Y=3322.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3680.595mil|Location2.X=3691.845mil|Location1.Y=3310.753mil|Location2.Y=3322.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad J?-MP1(-0.1mm,1.95mm) on Top Layer And Track (-3.2mm,2.75mm)(0.1mm,2.75mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582.17mil|Location2.X=3593.42mil|Location1.Y=3310.753mil|Location2.Y=3322.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582.17mil|Location2.X=3593.42mil|Location1.Y=3310.753mil|Location2.Y=3322.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad J?-MP2(-3.1mm,1.95mm) on Top Layer And Track (-3.2mm,2.75mm)(0.1mm,2.75mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3682.387mil|Location2.X=3690.054mil|Location1.Y=3138.145mil|Location2.Y=3145.811mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3682.387mil|Location2.X=3690.054mil|Location1.Y=3138.145mil|Location2.Y=3145.811mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad J?-MP3(-0.1mm,-1.95mm) on Top Layer And Text "C1" (-1.554mm,-0.077mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3680.595mil|Location2.X=3691.845mil|Location1.Y=3107.997mil|Location2.Y=3119.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3680.595mil|Location2.X=3691.845mil|Location1.Y=3107.997mil|Location2.Y=3119.247mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad J?-MP3(-0.1mm,-1.95mm) on Top Layer And Track (-3mm,-2.75mm)(-0.2mm,-2.75mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582.17mil|Location2.X=3593.42mil|Location1.Y=3107.997mil|Location2.Y=3119.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582.17mil|Location2.X=3593.42mil|Location1.Y=3107.997mil|Location2.Y=3119.247mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad J?-MP4(-3.1mm,-1.95mm) on Top Layer And Track (-3mm,-2.75mm)(-0.2mm,-2.75mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3700.567mil|Location2.X=3711.817mil|Location1.Y=3344.754mil|Location2.Y=3356.004mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3700.567mil|Location2.X=3711.817mil|Location1.Y=3344.754mil|Location2.Y=3356.004mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.253mm &lt; 0.254mm) Between Pad U2-5(-0.2mm,3.6mm) on Top Layer And Text "C2" (0.337mm,4.783mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.253mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3830.144mil|Location2.X=3837.81mil|Location1.Y=3269.255mil|Location2.Y=3276.921mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3830.144mil|Location2.X=3837.81mil|Location1.Y=3269.255mil|Location2.Y=3276.921mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U3-1(3.075mm,2.05mm) on Top Layer And Text "C5" (1.88mm,3.968mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3808.367mil|Location2.X=3816.034mil|Location1.Y=3298.676mil|Location2.Y=3306.343mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3808.367mil|Location2.X=3816.034mil|Location1.Y=3298.676mil|Location2.Y=3306.343mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U3-1(3.075mm,2.05mm) on Top Layer And Text "J?" (1.969mm,2.984mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3776.798mil|Location2.X=3788.048mil|Location1.Y=3307.699mil|Location2.Y=3318.949mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3776.798mil|Location2.X=3788.048mil|Location1.Y=3307.699mil|Location2.Y=3318.949mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.213mm &lt; 0.254mm) Between Pad U3-2(2.425mm,2.05mm) on Top Layer And Text "C2" (0.337mm,4.783mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.213mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3800.332mil|Location2.X=3807.998mil|Location1.Y=3307.418mil|Location2.Y=3315.085mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3800.332mil|Location2.X=3807.998mil|Location1.Y=3307.418mil|Location2.Y=3315.085mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U3-2(2.425mm,2.05mm) on Top Layer And Text "C5" (1.88mm,3.968mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3783.671mil|Location2.X=3791.338mil|Location1.Y=3298.676mil|Location2.Y=3306.343mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3783.671mil|Location2.X=3791.338mil|Location1.Y=3298.676mil|Location2.Y=3306.343mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U3-2(2.425mm,2.05mm) on Top Layer And Text "J?" (1.969mm,2.984mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3757.186mil|Location2.X=3764.852mil|Location1.Y=3299.494mil|Location2.Y=3307.161mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3757.186mil|Location2.X=3764.852mil|Location1.Y=3299.494mil|Location2.Y=3307.161mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U3-3(1.775mm,2.05mm) on Top Layer And Text "C2" (0.337mm,4.783mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3776.446mil|Location2.X=3784.113mil|Location1.Y=3271.145mil|Location2.Y=3278.811mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3776.446mil|Location2.X=3784.113mil|Location1.Y=3271.145mil|Location2.Y=3278.811mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U3-3(1.775mm,2.05mm) on Top Layer And Text "C5" (1.88mm,3.968mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3773.675mil|Location2.X=3781.341mil|Location1.Y=3308.673mil|Location2.Y=3316.34mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3773.675mil|Location2.X=3781.341mil|Location1.Y=3308.673mil|Location2.Y=3316.34mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U3-3(1.775mm,2.05mm) on Top Layer And Text "J?" (1.969mm,2.984mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.961mil|Location2.X=3742.628mil|Location1.Y=3313.942mil|Location2.Y=3321.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.961mil|Location2.X=3742.628mil|Location1.Y=3313.942mil|Location2.Y=3321.609mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U3-4(1.125mm,2.05mm) on Top Layer And Text "C2" (0.337mm,4.783mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3725.402mil|Location2.X=3736.652mil|Location1.Y=3271.383mil|Location2.Y=3282.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3725.402mil|Location2.X=3736.652mil|Location1.Y=3271.383mil|Location2.Y=3282.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.224mm &lt; 0.254mm) Between Pad U3-4(1.125mm,2.05mm) on Top Layer And Text "U2" (0.549mm,2.012mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.224mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDXZN5NDLSIQR1SUGJXEM45WXHPM5MKRY3EMQIVG1V33D1QAZICBI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3823.659mil|Location2.X=3831.325mil|Location1.Y=3228.699mil|Location2.Y=3236.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3823.659mil|Location2.X=3831.325mil|Location1.Y=3228.699mil|Location2.Y=3236.365mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (2.9mm,0.15mm) on Top Overlay And Text "J?" (1.969mm,2.984mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3834.729mil|Location2.X=3845.979mil|Location1.Y=3290.084mil|Location2.Y=3301.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3834.729mil|Location2.X=3845.979mil|Location1.Y=3290.084mil|Location2.Y=3301.334mil|Absolute=True">Silk To Silk Clearance Constraint: (0.07mm &lt; 0.254mm) Between Arc (3.85mm,2.05mm) on Top Overlay And Text "C5" (1.88mm,3.968mm) on Top Overlay Silk Text to Silk Clearance [0.07mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.655mil|Location2.X=3841.322mil|Location1.Y=3291.875mil|Location2.Y=3299.542mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.655mil|Location2.X=3841.322mil|Location1.Y=3291.875mil|Location2.Y=3299.542mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (3.85mm,2.05mm) on Top Overlay And Text "J?" (1.969mm,2.984mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3716.533mil|Location2.X=3724.199mil|Location1.Y=3406.664mil|Location2.Y=3414.33mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3716.533mil|Location2.X=3724.199mil|Location1.Y=3406.664mil|Location2.Y=3414.33mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (0.337mm,4.783mm) on Top Overlay And Text "C3" (0.517mm,4.712mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3769.403mil|Location2.X=3777.07mil|Location1.Y=3369.472mil|Location2.Y=3377.138mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3769.403mil|Location2.X=3777.07mil|Location1.Y=3369.472mil|Location2.Y=3377.138mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (0.337mm,4.783mm) on Top Overlay And Text "C5" (1.88mm,3.968mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3773.675mil|Location2.X=3781.341mil|Location1.Y=3308.673mil|Location2.Y=3316.34mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3773.675mil|Location2.X=3781.341mil|Location1.Y=3308.673mil|Location2.Y=3316.34mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (0.337mm,4.783mm) on Top Overlay And Text "J?" (1.969mm,2.984mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3709.423mil|Location2.X=3717.089mil|Location1.Y=3299.494mil|Location2.Y=3307.161mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3709.423mil|Location2.X=3717.089mil|Location1.Y=3299.494mil|Location2.Y=3307.161mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (0.337mm,4.783mm) on Top Overlay And Text "U2" (0.549mm,2.012mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3709.423mil|Location2.X=3717.089mil|Location1.Y=3325.49mil|Location2.Y=3333.156mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3709.423mil|Location2.X=3717.089mil|Location1.Y=3325.49mil|Location2.Y=3333.156mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (0.337mm,4.783mm) on Top Overlay And Track (0.23mm,2.904mm)(0.68mm,2.904mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3715.052mil|Location2.X=3722.718mil|Location1.Y=3380.308mil|Location2.Y=3387.975mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3715.052mil|Location2.X=3722.718mil|Location1.Y=3380.308mil|Location2.Y=3387.975mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (0.337mm,4.783mm) on Top Overlay And Track (0.48mm,4.296mm)(0.68mm,4.296mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.926mil|Location2.X=3730.592mil|Location1.Y=3325.978mil|Location2.Y=3333.645mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.926mil|Location2.X=3730.592mil|Location1.Y=3325.978mil|Location2.Y=3333.645mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (0.337mm,4.783mm) on Top Overlay And Track (0.68mm,2.904mm)(0.68mm,3.39mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3717.548mil|Location2.X=3728.798mil|Location1.Y=3367.056mil|Location2.Y=3378.306mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3717.548mil|Location2.X=3728.798mil|Location1.Y=3367.056mil|Location2.Y=3378.306mil|Absolute=True">Silk To Silk Clearance Constraint: (0.08mm &lt; 0.254mm) Between Text "C2" (0.337mm,4.783mm) on Top Overlay And Track (0.68mm,4.096mm)(0.68mm,4.296mm) on Top Overlay Silk Text to Silk Clearance [0.08mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3701.456mil|Location2.X=3712.706mil|Location1.Y=3317.643mil|Location2.Y=3328.893mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3701.456mil|Location2.X=3712.706mil|Location1.Y=3317.643mil|Location2.Y=3328.893mil|Absolute=True">Silk To Silk Clearance Constraint: (0.06mm &lt; 0.254mm) Between Text "C2" (0.337mm,4.783mm) on Top Overlay And Track (-3.2mm,2.75mm)(0.1mm,2.75mm) on Top Overlay Silk Text to Silk Clearance [0.06mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.774mil|Location2.X=3734.024mil|Location1.Y=3385.963mil|Location2.Y=3397.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.774mil|Location2.X=3734.024mil|Location1.Y=3385.963mil|Location2.Y=3397.213mil|Absolute=True">Silk To Silk Clearance Constraint: (0.21mm &lt; 0.254mm) Between Text "C3" (0.517mm,4.712mm) on Top Overlay And Track (0.48mm,4.296mm)(0.68mm,4.296mm) on Top Overlay Silk Text to Silk Clearance [0.21mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.774mil|Location2.X=3734.024mil|Location1.Y=3385.963mil|Location2.Y=3397.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3722.774mil|Location2.X=3734.024mil|Location1.Y=3385.963mil|Location2.Y=3397.213mil|Absolute=True">Silk To Silk Clearance Constraint: (0.21mm &lt; 0.254mm) Between Text "C3" (0.517mm,4.712mm) on Top Overlay And Track (0.68mm,4.096mm)(0.68mm,4.296mm) on Top Overlay Silk Text to Silk Clearance [0.21mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.655mil|Location2.X=3841.322mil|Location1.Y=3288.68mil|Location2.Y=3296.346mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.655mil|Location2.X=3841.322mil|Location1.Y=3288.68mil|Location2.Y=3296.346mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C5" (1.88mm,3.968mm) on Top Overlay And Text "J?" (1.969mm,2.984mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3828.352mil|Location2.X=3839.602mil|Location1.Y=3255.677mil|Location2.Y=3266.927mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3828.352mil|Location2.X=3839.602mil|Location1.Y=3255.677mil|Location2.Y=3266.927mil|Absolute=True">Silk To Silk Clearance Constraint: (0.252mm &lt; 0.254mm) Between Text "C5" (1.88mm,3.968mm) on Top Overlay And Track (0.5mm,0.95mm)(3.7mm,0.95mm) on Top Overlay Silk Text to Silk Clearance [0.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.655mil|Location2.X=3841.322mil|Location1.Y=3248.568mil|Location2.Y=3256.235mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.655mil|Location2.X=3841.322mil|Location1.Y=3248.568mil|Location2.Y=3256.235mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "J?" (1.969mm,2.984mm) on Top Overlay And Track (0.5mm,0.95mm)(3.7mm,0.95mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.655mil|Location2.X=3841.322mil|Location1.Y=3238.696mil|Location2.Y=3246.362mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.655mil|Location2.X=3841.322mil|Location1.Y=3238.696mil|Location2.Y=3246.362mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "J?" (1.969mm,2.984mm) on Top Overlay And Track (3.7mm,-0.95mm)(3.7mm,0.95mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3715.852mil|Location2.X=3723.518mil|Location1.Y=3248.568mil|Location2.Y=3256.235mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3715.852mil|Location2.X=3723.518mil|Location1.Y=3248.568mil|Location2.Y=3256.235mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "U2" (0.549mm,2.012mm) on Top Overlay And Track (0.5mm,-0.95mm)(0.5mm,0.95mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3717.793mil|Location2.X=3725.459mil|Location1.Y=3248.568mil|Location2.Y=3256.235mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\WCE_Power_Backscatter.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3717.793mil|Location2.X=3725.459mil|Location1.Y=3248.568mil|Location2.Y=3256.235mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "U2" (0.549mm,2.012mm) on Top Overlay And Track (0.5mm,0.95mm)(3.7mm,0.95mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
