@@ -333,7 +333,7 @@ OutputDefault20=0
 [OutputGroup2]
 Name=Simulator Outputs
 Description=
-TargetPrinter=\\followprint.win.ntnu.no\ntnuprint-ricoh
+TargetPrinter=OneNote for Windows 10
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 
 [OutputGroup3]
@@ -977,7 +977,7 @@ Type7=0
 Type8=1
 Type9=1
 Type10=1
-Type11=2
+Type11=1
 Type12=2
 Type13=2
 Type14=1
@@ -1025,7 +1025,7 @@ Type55=1
 Type56=2
 Type57=1
 Type58=1
-Type59=2
+Type59=1
 Type60=0
 Type61=0
 Type62=0
