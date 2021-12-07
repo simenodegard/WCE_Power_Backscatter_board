@@ -1,0 +1,19 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: WCE_Power_Backscatter.PcbDoc   12/3/2021  2:29:53 PM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : WCE_Power_Backscatter.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      0.15mm (6mil)                                             Round             7         PTH        14.10mm (0.56inch)
+T2      0.7mm (28mil)                                             Round             2         PTH        3.20mm (0.13inch)
+T3      0.8mm (31mil)                                             Round             3         PTH        13.61mm (0.54inch)
+T4      0.92mm (36mil)                                            Round             2         PTH        7.45mm (0.29inch)
+T5      0.95mm (37mil)                                            Round             2         PTH        5.30mm (0.21inch)
+T6      1mm (39mil)                                               Round             2         PTH        1.80mm (0.07inch)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              18
+
+Total Processing Time (hh:mm:ss) : 00:00:00

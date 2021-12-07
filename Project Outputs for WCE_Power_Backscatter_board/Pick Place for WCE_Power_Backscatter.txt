@@ -1,0 +1,25 @@
+Altium Designer Pick and Place Locations
+C:\Users\Simen\OneDrive\Documents\NTNU\V2021\PillCam\Master\Altium\WCE_Power_Backscatter_board\Project Outputs for WCE_Power_Backscatter_board\Pick Place for WCE_Power_Backscatter.txt
+
+========================================================================================================================
+File Design Information:
+
+Date:       03/12/21
+Time:       14:30
+Revision:   ec320d1a2ae7d8124a1a7a0ee658e3d5d26df0f5
+Variant:    No variations
+Units used: mm
+
+Designator Comment       Layer       Footprint             Center-X(mm) Center-Y(mm) Rotation Description                                                                                                                               
+J2         2040852-1     BottomLayer 2040852-1             -1.7000      0.0000       90       "TE connectivity 2040852-1 PCB Spring Contact"                                                                                            
+J1         2040852-1     BottomLayer 2040852-1             1.7000       0.0000       90       "TE connectivity 2040852-1 PCB Spring Contact"                                                                                            
+U1         TLV71733PDQNT TopLayer    DQN0004A_V            1.4500       2.1250       135      "Single Output Low Noise LDO, 150 mA, Fixed 3.3 V Output, 1.7 to 5.5 V Input, 4-pin X2SON (DQN), -40 to 85 degC, Green (RoHS & no Sb/Br)" 
+C6         3nF           TopLayer    CAPC0603X33X15LL03T05 3.3500       -1.0500      90       "Capacitor 3 nF 0201 XR5"                                                                                                                 
+C5         3nF           TopLayer    CAPC0603X33X15LL03T05 -3.3500      -2.4000      270      "Capacitor 3 nF 0201 XR5"                                                                                                                 
+U2         TLV71725PDQNT TopLayer    DQN0004A_V            -1.4500      2.1250       45       "Single Output Low Noise LDO, 150 mA, Fixed 2.5 V Output, 1.7 to 5.5 V Input, 4-pin X2SON (DQN), -40 to 85 degC, Green (RoHS & no Sb/Br)" 
+C4         0.1uF         TopLayer    CAPC0603X33X15LL03T05 -2.1500      1.4250       135      "Capacitor 0.1 uF 0201 XR5"                                                                                                               
+C3         0.1uF         TopLayer    CAPC0603X33X15LL03T05 2.1500       1.4250       225      "Capacitor 0.1 uF 0201 XR5"                                                                                                               
+U3         ADG902BRMZ    TopLayer    ADI-RM-8_L            0.0000       -1.1000      0        "RF Switch, Wideband, 40 dB Isolation at 1 GHz, CMOS 1.65 V to 2.75 V, SPST Switches, RM-8, Pb-Free, 50 Tube"                             
+C7         0.1uF         TopLayer    CAPC0603X33X15LL03T05 -3.3500      -1.0250      90       "Capacitor 0.1 uF 0201 XR5"                                                                                                               
+C2         0.1uF         TopLayer    CAPC0603X33X15LL03T05 -0.6600      1.6500       45       "Capacitor 0.1 uF 0201 XR5"                                                                                                               
+C1         0.1uF         TopLayer    CAPC0603X33X15LL03T05 0.6600       1.6500       135      "Capacitor 0.1 uF 0201 XR5"                                                                                                               
